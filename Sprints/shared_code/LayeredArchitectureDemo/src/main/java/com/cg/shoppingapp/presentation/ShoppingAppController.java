@@ -15,7 +15,15 @@ public class ShoppingAppController {
 	
 	public Item findItemById(int itemId) throws ItemNotFoundException {
 		logger.info("Finding item for id: " + itemId);
-		return itemService.findById(itemId);
+		Item item = null;
+		try {
+			item = itemService.findById(itemId);
+		}
+		catch(Exception e) {
+			logger.error("ItemNotFoundException: " + e);
+			throw new ItemNotFoundException(e.getMessage());
+		}
+		return item;
 	}
 
 }
