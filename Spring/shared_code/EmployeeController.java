@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 // http://localhost:8080/cgapp/employee
@@ -18,6 +20,28 @@ public class EmployeeController {
 	static {
 		empList.add(new Employee(1, "Tom", 45000));
 		empList.add(new Employee(2, "Jerry", 30000));
+	}
+	
+/*
+	@GetMapping(value="/employee", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Employee getEmployeeById(@RequestParam("id") String empId) {
+		for(Employee emp: empList) {
+			if(emp.id == Integer.parseInt(empId))
+				return emp;
+		}
+		return null;
+	}
+*/	
+	
+	@GetMapping(value="/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Employee getEmployeeById(@PathVariable("id") String empId, 
+			@RequestHeader("auth-token") String authToken) {
+		System.out.println("authToken = " + authToken);
+		for(Employee emp: empList) {
+			if(emp.id == Integer.parseInt(empId))
+				return emp;
+		}
+		return null;
 	}
 	
 	@GetMapping(value="/employee", produces = MediaType.APPLICATION_JSON_VALUE)
