@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	
+	<script src="js/myapp.js"></script>
+	
+	<script>
+	
+	function fillCity() {
+		alert("fillCity() called");
+		var cityElement = document.getElementById('cityId');
+		cityElement.value = "Bhubaneswar";
+		var cityInfoElement = document.getElementById('city_info');
+		cityInfoElement.innerHTML = "Bhubaneswar is located in Odisha state.";
+	}
+	function copyText() {
+		
+		var unameElement = document.getElementById('unameId');
+		var mynameElement = document.getElementById('mynameId');
+		mynameElement.value = unameElement.value;
+	}
+	function exceptionDemo(x, y) {
+		try {
+			if(y==0) {
+				throw 'Error: Cannot divide by zero';
+			}
+			else {
+				console.log("No exception");
+			}
+		}
+		catch(err) {
+			document.write(err);
+		}
+		var dt = new Date();
+		document.write("Current date: " + dt);
+	}
+	
+	function windowDemo() {
+		googleWindow = window.open("http://google.co.in");
+		//googleWindow.close();
+		googleWindow.print();
+	}
+	
+	function Order(id, title, price) { //Template function
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.getPrice = function() {
+			return this.price;
+		}
+		this.print = function() {
+			console.log(this.id + " - " + this.title + " - " + this.price);
+		}
+	}
+	
+	function createOrders() {
+		var order_1 = new Order(1, "Chairs", 10000);
+		var order_2 = new Order(2, "Tables", 25000);
+		order_1.print();
+	}
+	</script>
+</head>
+<body >
+
+	<iframe src="http://wikipedia.com" name="myFrame" ></iframe>
+
+	<input type="text" name="uname" placeholder="Enter name"
+		onkeyup="copyText()" id="unameId">
+	
+	<input type="text" name="myname" id="mynameId">
+	
+	<input type="text" name="city" placeholder="Enter city" id="cityId"
+		onfocus="fillCity()">
+
+<div id="city_info"></div>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
